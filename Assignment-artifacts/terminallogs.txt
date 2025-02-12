@@ -1,0 +1,440 @@
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ ./network.sh up
+Using docker and docker-compose
+Starting nodes with CLI timeout of '5' tries and CLI delay of '3' seconds and using database 'leveldb' with crypto from 'cryptogen'
+Unable to find image 'hyperledger/fabric-peer:latest' locally
+latest: Pulling from hyperledger/fabric-peer
+6414378b6477: Pull complete 
+f25800cb3686: Pull complete 
+b0b6f9a110a2: Pull complete 
+a5a6e418daea: Pull complete 
+046f85698d52: Pull complete 
+698e112e089f: Pull complete 
+Digest: sha256:35323c684fcbb1c6d239c0a342c258a775130a624753d6c5def6248088f7b1b4
+Status: Downloaded newer image for hyperledger/fabric-peer:latest
+LOCAL_VERSION=v2.5.10
+DOCKER_IMAGE_VERSION=v2.5.11
+Local fabric binaries and docker images are out of sync. This may cause problems.
+/workspaces/fabric-samples/test-network/../bin/cryptogen
+Generating certificates using cryptogen tool
+Creating JIO Identities
++ cryptogen generate --config=./organizations/cryptogen/crypto-config-jio.yaml --output=organizations
+airtel.example.com
++ res=0
+Creating Airtel Identities
++ cryptogen generate --config=./organizations/cryptogen/crypto-config-airtel.yaml --output=organizations
+jio.example.com
++ res=0
+Creating Orderer Org Identities
++ cryptogen generate --config=./organizations/cryptogen/crypto-config-orderer.yaml --output=organizations
++ res=0
+Generating CCP files for Org1 and Org2
+awk: fatal: cannot open file `organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem' for reading (No such file or directory)
+awk: fatal: cannot open file `organizations/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem' for reading (No such file or directory)
+./organizations/ccp-generate.sh: line 35: organizations/peerOrganizations/org1.example.com/connection-org1.json: No such file or directory
+awk: fatal: cannot open file `organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem' for reading (No such file or directory)
+awk: fatal: cannot open file `organizations/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem' for reading (No such file or directory)
+./organizations/ccp-generate.sh: line 36: organizations/peerOrganizations/org1.example.com/connection-org1.yaml: No such file or directory
+awk: fatal: cannot open file `organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem' for reading (No such file or directory)
+awk: fatal: cannot open file `organizations/peerOrganizations/org2.example.com/ca/ca.org2.example.com-cert.pem' for reading (No such file or directory)
+./organizations/ccp-generate.sh: line 44: organizations/peerOrganizations/org2.example.com/connection-org2.json: No such file or directory
+awk: fatal: cannot open file `organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem' for reading (No such file or directory)
+awk: fatal: cannot open file `organizations/peerOrganizations/org2.example.com/ca/ca.org2.example.com-cert.pem' for reading (No such file or directory)
+./organizations/ccp-generate.sh: line 45: organizations/peerOrganizations/org2.example.com/connection-org2.yaml: No such file or directory
+WARN[0000] /workspaces/fabric-samples/test-network/compose/compose-test-net.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+WARN[0000] /workspaces/fabric-samples/test-network/compose/docker/docker-compose-test-net.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] Running 7/7
+ ✔ orderer.example.com Pulled                                                                                                                                                       10.3s 
+   ✔ 6414378b6477 Already exists                                                                                                                                                     0.0s 
+   ✔ b67936ae0f59 Pull complete                                                                                                                                                      0.7s 
+   ✔ 4774c04a10bb Pull complete                                                                                                                                                      1.5s 
+   ✔ dd98d562807b Pull complete                                                                                                                                                      1.5s 
+   ✔ 9bb334e1c994 Pull complete                                                                                                                                                      7.2s 
+   ✔ 6cc91d16b133 Pull complete                                                                                                                                                      7.3s 
+[+] Running 7/7
+ ✔ Network fabric_test                        Created                                                                                                                                0.1s 
+ ✔ Volume "compose_orderer.example.com"       Created                                                                                                                                0.0s 
+ ✔ Volume "compose_peer0.jio.example.com"     Created                                                                                                                                0.0s 
+ ✔ Volume "compose_peer0.airtel.example.com"  Created                                                                                                                                0.0s 
+ ✔ Container orderer.example.com              Started                                                                                                                                0.8s 
+ ✔ Container peer0.jio.example.com            Started                                                                                                                                0.7s 
+ ✔ Container peer0.airtel.example.com         Started                                                                                                                                0.8s 
+CONTAINER ID   IMAGE                               COMMAND             CREATED        STATUS                  PORTS                                                                                                                             NAMES
+f48ad8972e68   hyperledger/fabric-orderer:latest   "orderer"           1 second ago   Up Less than a second   0.0.0.0:7050->7050/tcp, :::7050->7050/tcp, 0.0.0.0:7053->7053/tcp, :::7053->7053/tcp, 0.0.0.0:9443->9443/tcp, :::9443->9443/tcp   orderer.example.com
+cd874559b96a   hyperledger/fabric-peer:latest      "peer node start"   1 second ago   Up Less than a second   0.0.0.0:9051->9051/tcp, :::9051->9051/tcp, 7051/tcp, 0.0.0.0:9445->9445/tcp, :::9445->9445/tcp                                    peer0.airtel.example.com
+5a9f020b76a3   hyperledger/fabric-peer:latest      "peer node start"   1 second ago   Up Less than a second   0.0.0.0:7051->7051/tcp, :::7051->7051/tcp, 0.0.0.0:9444->9444/tcp, :::9444->9444/tcp                                              peer0.jio.example.com
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ ./network.sh createChannel -c consent-channel
+Using docker and docker-compose
+Creating channel 'consent-channel'.
+If network is not up, starting nodes with CLI timeout of '5' tries and CLI delay of '3' seconds and using database 'leveldb 
+Bringing up network
+LOCAL_VERSION=v2.5.10
+DOCKER_IMAGE_VERSION=v2.5.11
+Local fabric binaries and docker images are out of sync. This may cause problems.
+WARN[0000] /workspaces/fabric-samples/test-network/compose/compose-test-net.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+WARN[0000] /workspaces/fabric-samples/test-network/compose/docker/docker-compose-test-net.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] Running 3/0
+ ✔ Container peer0.airtel.example.com  Running                                                                                                                                       0.0s 
+ ✔ Container orderer.example.com       Running                                                                                                                                       0.0s 
+ ✔ Container peer0.jio.example.com     Running                                                                                                                                       0.0s 
+CONTAINER ID   IMAGE                               COMMAND             CREATED              STATUS              PORTS                                                                                                                             NAMES
+f48ad8972e68   hyperledger/fabric-orderer:latest   "orderer"           About a minute ago   Up About a minute   0.0.0.0:7050->7050/tcp, :::7050->7050/tcp, 0.0.0.0:7053->7053/tcp, :::7053->7053/tcp, 0.0.0.0:9443->9443/tcp, :::9443->9443/tcp   orderer.example.com
+cd874559b96a   hyperledger/fabric-peer:latest      "peer node start"   About a minute ago   Up About a minute   0.0.0.0:9051->9051/tcp, :::9051->9051/tcp, 7051/tcp, 0.0.0.0:9445->9445/tcp, :::9445->9445/tcp                                    peer0.airtel.example.com
+5a9f020b76a3   hyperledger/fabric-peer:latest      "peer node start"   About a minute ago   Up About a minute   0.0.0.0:7051->7051/tcp, :::7051->7051/tcp, 0.0.0.0:9444->9444/tcp, :::9444->9444/tcp                                              peer0.jio.example.com
+Using docker and docker-compose
+Generating channel genesis block 'consent-channel.block'
+Using organization 1
+/workspaces/fabric-samples/test-network/../bin/configtxgen
++ '[' 0 -eq 1 ']'
++ configtxgen -profile ChannelUsingRaft -outputBlock ./channel-artifacts/consent-channel.block -channelID consent-channel
+2025-02-12 19:43:09.982 UTC 0001 INFO [common.tools.configtxgen] main -> Loading configuration
+2025-02-12 19:43:09.986 UTC 0002 INFO [common.tools.configtxgen.localconfig] completeInitialization -> orderer type: etcdraft
+2025-02-12 19:43:09.986 UTC 0003 INFO [common.tools.configtxgen.localconfig] completeInitialization -> Orderer.EtcdRaft.Options unset, setting to tick_interval:"500ms" election_tick:10 heartbeat_tick:1 max_inflight_blocks:5 snapshot_interval_size:16777216 
+2025-02-12 19:43:09.987 UTC 0004 INFO [common.tools.configtxgen.localconfig] Load -> Loaded configuration: /workspaces/fabric-samples/test-network/configtx/configtx.yaml
+2025-02-12 19:43:09.990 UTC 0005 INFO [common.tools.configtxgen] doOutputBlock -> Generating genesis block
+2025-02-12 19:43:09.990 UTC 0006 INFO [common.tools.configtxgen] doOutputBlock -> Creating application channel genesis block
+2025-02-12 19:43:09.990 UTC 0007 INFO [common.tools.configtxgen] doOutputBlock -> Writing genesis block
++ res=0
+Creating channel consent-channel
+Adding orderers
++ . scripts/orderer.sh consent-channel
++ '[' 0 -eq 1 ']'
++ res=0
+Status: 201
+{
+        "name": "consent-channel",
+        "url": "/participation/v1/channels/consent-channel",
+        "consensusRelation": "consenter",
+        "status": "active",
+        "height": 1
+}
+
+Channel 'consent-channel' created
+Joining jio peer to the channel...
+Using organization 1
++ peer channel join -b ./channel-artifacts/consent-channel.block
++ res=0
+2025-02-12 19:43:16.091 UTC 0001 INFO [channelCmd] InitCmdFactory -> Endorser and orderer connections initialized
+2025-02-12 19:43:16.110 UTC 0002 INFO [channelCmd] executeJoin -> Successfully submitted proposal to join channel
+Joining jio peer to the channel...
+Using organization 2
++ peer channel join -b ./channel-artifacts/consent-channel.block
++ res=0
+2025-02-12 19:43:19.172 UTC 0001 INFO [channelCmd] InitCmdFactory -> Endorser and orderer connections initialized
+2025-02-12 19:43:19.192 UTC 0002 INFO [channelCmd] executeJoin -> Successfully submitted proposal to join channel
+Setting anchor peer for jio...
+Using organization 1
+Fetching channel config for channel consent-channel
+Using organization 1
+Fetching the most recent configuration block for the channel
+++ peer channel fetch config /workspaces/fabric-samples/test-network/channel-artifacts/config_block.pb -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com -c consent-channel --tls --cafile /workspaces/fabric-samples/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+2025-02-12 19:43:19.254 UTC 0001 INFO [channelCmd] InitCmdFactory -> Endorser and orderer connections initialized
+2025-02-12 19:43:19.257 UTC 0002 INFO [cli.common] readBlock -> Received block: 0
+2025-02-12 19:43:19.258 UTC 0003 INFO [channelCmd] fetch -> Retrieving last config block: 0
+2025-02-12 19:43:19.260 UTC 0004 INFO [cli.common] readBlock -> Received block: 0
+Decoding config block to JSON and isolating config to /workspaces/fabric-samples/test-network/channel-artifacts/JIOMSPconfig.json
+++ configtxlator proto_decode --input /workspaces/fabric-samples/test-network/channel-artifacts/config_block.pb --type common.Block --output /workspaces/fabric-samples/test-network/channel-artifacts/config_block.json
+++ jq '.data.data[0].payload.data.config' /workspaces/fabric-samples/test-network/channel-artifacts/config_block.json
+++ res=0
+Generating anchor peer update transaction for Org1 on channel consent-channel
+++ jq '.channel_group.groups.Application.groups.JIOMSP.values += {"AnchorPeers":{"mod_policy": "Admins","value":{"anchor_peers": [{"host": "peer0.jio.example.com","port": 7051}]},"version": "0"}}' /workspaces/fabric-samples/test-network/channel-artifacts/JIOMSPconfig.json
+++ res=0
+++ configtxlator proto_encode --input /workspaces/fabric-samples/test-network/channel-artifacts/JIOMSPconfig.json --type common.Config --output /workspaces/fabric-samples/test-network/channel-artifacts/original_config.pb
+++ configtxlator proto_encode --input /workspaces/fabric-samples/test-network/channel-artifacts/JIOMSPmodified_config.json --type common.Config --output /workspaces/fabric-samples/test-network/channel-artifacts/modified_config.pb
+++ configtxlator compute_update --channel_id consent-channel --original /workspaces/fabric-samples/test-network/channel-artifacts/original_config.pb --updated /workspaces/fabric-samples/test-network/channel-artifacts/modified_config.pb --output /workspaces/fabric-samples/test-network/channel-artifacts/config_update.pb
+++ configtxlator proto_decode --input /workspaces/fabric-samples/test-network/channel-artifacts/config_update.pb --type common.ConfigUpdate --output /workspaces/fabric-samples/test-network/channel-artifacts/config_update.json
+++ jq .
++++ cat /workspaces/fabric-samples/test-network/channel-artifacts/config_update.json
+++ echo '{"payload":{"header":{"channel_header":{"channel_id":"consent-channel", "type":2}},"data":{"config_update":{' '"channel_id":' '"consent-channel",' '"isolated_data":' '{},' '"read_set":' '{' '"groups":' '{' '"Application":' '{' '"groups":' '{' '"JIOMSP":' '{' '"groups":' '{},' '"mod_policy":' '"",' '"policies":' '{' '"Admins":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Endorsement":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Readers":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Writers":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '}' '},' '"values":' '{' '"MSP":' '{' '"mod_policy":' '"",' '"value":' null, '"version":' '"0"' '}' '},' '"version":' '"0"' '}' '},' '"mod_policy":' '"",' '"policies":' '{},' '"values":' '{},' '"version":' '"0"' '}' '},' '"mod_policy":' '"",' '"policies":' '{},' '"values":' '{},' '"version":' '"0"' '},' '"write_set":' '{' '"groups":' '{' '"Application":' '{' '"groups":' '{' '"JIOMSP":' '{' '"groups":' '{},' '"mod_policy":' '"Admins",' '"policies":' '{' '"Admins":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Endorsement":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Readers":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Writers":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '}' '},' '"values":' '{' '"AnchorPeers":' '{' '"mod_policy":' '"Admins",' '"value":' '{' '"anchor_peers":' '[' '{' '"host":' '"peer0.jio.example.com",' '"port":' 7051 '}' ']' '},' '"version":' '"0"' '},' '"MSP":' '{' '"mod_policy":' '"",' '"value":' null, '"version":' '"0"' '}' '},' '"version":' '"1"' '}' '},' '"mod_policy":' '"",' '"policies":' '{},' '"values":' '{},' '"version":' '"0"' '}' '},' '"mod_policy":' '"",' '"policies":' '{},' '"values":' '{},' '"version":' '"0"' '}' '}}}}'
+++ configtxlator proto_encode --input /workspaces/fabric-samples/test-network/channel-artifacts/config_update_in_envelope.json --type common.Envelope --output /workspaces/fabric-samples/test-network/channel-artifacts/JIOMSPanchors.tx
+2025-02-12 19:43:19.504 UTC 0001 INFO [channelCmd] InitCmdFactory -> Endorser and orderer connections initialized
+2025-02-12 19:43:19.517 UTC 0002 INFO [channelCmd] update -> Successfully submitted channel update
+Anchor peer set for org 'JIOMSP' on channel 'consent-channel'
+Setting anchor peer for jio...
+Using organization 2
+Fetching channel config for channel consent-channel
+Using organization 2
+Fetching the most recent configuration block for the channel
+++ peer channel fetch config /workspaces/fabric-samples/test-network/channel-artifacts/config_block.pb -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com -c consent-channel --tls --cafile /workspaces/fabric-samples/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+2025-02-12 19:43:19.624 UTC 0001 INFO [channelCmd] InitCmdFactory -> Endorser and orderer connections initialized
+2025-02-12 19:43:19.627 UTC 0002 INFO [cli.common] readBlock -> Received block: 1
+2025-02-12 19:43:19.627 UTC 0003 INFO [channelCmd] fetch -> Retrieving last config block: 1
+2025-02-12 19:43:19.628 UTC 0004 INFO [cli.common] readBlock -> Received block: 1
+Decoding config block to JSON and isolating config to /workspaces/fabric-samples/test-network/channel-artifacts/AirtelMSPconfig.json
+++ configtxlator proto_decode --input /workspaces/fabric-samples/test-network/channel-artifacts/config_block.pb --type common.Block --output /workspaces/fabric-samples/test-network/channel-artifacts/config_block.json
+++ jq '.data.data[0].payload.data.config' /workspaces/fabric-samples/test-network/channel-artifacts/config_block.json
+++ res=0
+Generating anchor peer update transaction for Org2 on channel consent-channel
+++ jq '.channel_group.groups.Application.groups.AirtelMSP.values += {"AnchorPeers":{"mod_policy": "Admins","value":{"anchor_peers": [{"host": "peer0.airtel.example.com","port": 9051}]},"version": "0"}}' /workspaces/fabric-samples/test-network/channel-artifacts/AirtelMSPconfig.json
+++ res=0
+++ configtxlator proto_encode --input /workspaces/fabric-samples/test-network/channel-artifacts/AirtelMSPconfig.json --type common.Config --output /workspaces/fabric-samples/test-network/channel-artifacts/original_config.pb
+++ configtxlator proto_encode --input /workspaces/fabric-samples/test-network/channel-artifacts/AirtelMSPmodified_config.json --type common.Config --output /workspaces/fabric-samples/test-network/channel-artifacts/modified_config.pb
+++ configtxlator compute_update --channel_id consent-channel --original /workspaces/fabric-samples/test-network/channel-artifacts/original_config.pb --updated /workspaces/fabric-samples/test-network/channel-artifacts/modified_config.pb --output /workspaces/fabric-samples/test-network/channel-artifacts/config_update.pb
+++ configtxlator proto_decode --input /workspaces/fabric-samples/test-network/channel-artifacts/config_update.pb --type common.ConfigUpdate --output /workspaces/fabric-samples/test-network/channel-artifacts/config_update.json
+++ jq .
++++ cat /workspaces/fabric-samples/test-network/channel-artifacts/config_update.json
+++ echo '{"payload":{"header":{"channel_header":{"channel_id":"consent-channel", "type":2}},"data":{"config_update":{' '"channel_id":' '"consent-channel",' '"isolated_data":' '{},' '"read_set":' '{' '"groups":' '{' '"Application":' '{' '"groups":' '{' '"AirtelMSP":' '{' '"groups":' '{},' '"mod_policy":' '"",' '"policies":' '{' '"Admins":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Endorsement":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Readers":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Writers":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '}' '},' '"values":' '{' '"MSP":' '{' '"mod_policy":' '"",' '"value":' null, '"version":' '"0"' '}' '},' '"version":' '"0"' '}' '},' '"mod_policy":' '"",' '"policies":' '{},' '"values":' '{},' '"version":' '"0"' '}' '},' '"mod_policy":' '"",' '"policies":' '{},' '"values":' '{},' '"version":' '"0"' '},' '"write_set":' '{' '"groups":' '{' '"Application":' '{' '"groups":' '{' '"AirtelMSP":' '{' '"groups":' '{},' '"mod_policy":' '"Admins",' '"policies":' '{' '"Admins":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Endorsement":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Readers":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '},' '"Writers":' '{' '"mod_policy":' '"",' '"policy":' null, '"version":' '"0"' '}' '},' '"values":' '{' '"AnchorPeers":' '{' '"mod_policy":' '"Admins",' '"value":' '{' '"anchor_peers":' '[' '{' '"host":' '"peer0.airtel.example.com",' '"port":' 9051 '}' ']' '},' '"version":' '"0"' '},' '"MSP":' '{' '"mod_policy":' '"",' '"value":' null, '"version":' '"0"' '}' '},' '"version":' '"1"' '}' '},' '"mod_policy":' '"",' '"policies":' '{},' '"values":' '{},' '"version":' '"0"' '}' '},' '"mod_policy":' '"",' '"policies":' '{},' '"values":' '{},' '"version":' '"0"' '}' '}}}}'
+++ configtxlator proto_encode --input /workspaces/fabric-samples/test-network/channel-artifacts/config_update_in_envelope.json --type common.Envelope --output /workspaces/fabric-samples/test-network/channel-artifacts/AirtelMSPanchors.tx
+2025-02-12 19:43:19.867 UTC 0001 INFO [channelCmd] InitCmdFactory -> Endorser and orderer connections initialized
+2025-02-12 19:43:19.879 UTC 0002 INFO [channelCmd] update -> Successfully submitted channel update
+Anchor peer set for org 'AirtelMSP' on channel 'consent-channel'
+Channel 'consent-channel' joined
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ ./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-go -ccl go -c consent-channel
+Using docker and docker-compose
+deploying chaincode on channel 'consent-channel'
+executing with the following
+- CHANNEL_NAME: consent-channel
+- CC_NAME: basic
+- CC_SRC_PATH: ../asset-transfer-basic/chaincode-go
+- CC_SRC_LANGUAGE: go
+- CC_VERSION: 1.0
+- CC_SEQUENCE: auto
+- CC_END_POLICY: NA
+- CC_COLL_CONFIG: NA
+- CC_INIT_FCN: NA
+- DELAY: 3
+- MAX_RETRY: 5
+- VERBOSE: false
+executing with the following
+- CC_NAME: basic
+- CC_SRC_PATH: ../asset-transfer-basic/chaincode-go
+- CC_SRC_LANGUAGE: go
+- CC_VERSION: 1.0
+Vendoring Go dependencies at ../asset-transfer-basic/chaincode-go
+/workspaces/fabric-samples/asset-transfer-basic/chaincode-go /workspaces/fabric-samples/test-network
+go: downloading github.com/hyperledger/fabric-contract-api-go/v2 v2.2.0
+go: downloading github.com/hyperledger/fabric-chaincode-go/v2 v2.0.0
+go: downloading github.com/hyperledger/fabric-protos-go-apiv2 v0.3.4
+go: downloading github.com/stretchr/testify v1.10.0
+go: downloading google.golang.org/protobuf v1.36.1
+go: downloading google.golang.org/grpc v1.67.0
+go: downloading github.com/xeipuuv/gojsonschema v1.2.0
+go: downloading github.com/go-openapi/spec v0.21.0
+go: downloading github.com/davecgh/go-spew v1.1.1
+go: downloading github.com/pmezard/go-difflib v1.0.0
+go: downloading google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1
+go: downloading golang.org/x/net v0.28.0
+go: downloading github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415
+go: downloading gopkg.in/yaml.v3 v3.0.1
+go: downloading golang.org/x/sys v0.24.0
+go: downloading github.com/go-openapi/jsonpointer v0.21.0
+go: downloading github.com/go-openapi/jsonreference v0.21.0
+go: downloading github.com/go-openapi/swag v0.23.0
+go: downloading github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb
+go: downloading github.com/mailru/easyjson v0.7.7
+go: downloading github.com/josharian/intern v1.0.0
+go: downloading golang.org/x/text v0.17.0
+/workspaces/fabric-samples/test-network
+Finished vendoring Go dependencies
++ '[' false = true ']'
++ peer lifecycle chaincode package basic.tar.gz --path ../asset-transfer-basic/chaincode-go --lang golang --label basic_1.0
++ res=0
+Chaincode is packaged
+Installing chaincode on peer0.org1...
+Using organization 1
++ peer lifecycle chaincode queryinstalled --output json
++ grep '^basic_1.0:b2974d4b301358c998b17154ea19f8376cd812fddfd96150a17888520322630d$'
++ jq -r 'try (.installed_chaincodes[].package_id)'
++ test 1 -ne 0
++ peer lifecycle chaincode install basic.tar.gz
++ res=0
+2025-02-12 19:45:44.111 UTC 0001 INFO [cli.lifecycle.chaincode] submitInstallProposal -> Installed remotely: response:<status:200 payload:"\nJbasic_1.0:b2974d4b301358c998b17154ea19f8376cd812fddfd96150a17888520322630d\022\tbasic_1.0" > 
+2025-02-12 19:45:44.111 UTC 0002 INFO [cli.lifecycle.chaincode] submitInstallProposal -> Chaincode code package identifier: basic_1.0:b2974d4b301358c998b17154ea19f8376cd812fddfd96150a17888520322630d
+Chaincode is installed on peer0.jio
+Install chaincode on peer0.org2...
+Using organization 2
++ peer lifecycle chaincode queryinstalled --output json
++ jq -r 'try (.installed_chaincodes[].package_id)'
++ grep '^basic_1.0:b2974d4b301358c998b17154ea19f8376cd812fddfd96150a17888520322630d$'
++ test 1 -ne 0
++ peer lifecycle chaincode install basic.tar.gz
++ res=0
+2025-02-12 19:46:26.110 UTC 0001 INFO [cli.lifecycle.chaincode] submitInstallProposal -> Installed remotely: response:<status:200 payload:"\nJbasic_1.0:b2974d4b301358c998b17154ea19f8376cd812fddfd96150a17888520322630d\022\tbasic_1.0" > 
+2025-02-12 19:46:26.110 UTC 0002 INFO [cli.lifecycle.chaincode] submitInstallProposal -> Chaincode code package identifier: basic_1.0:b2974d4b301358c998b17154ea19f8376cd812fddfd96150a17888520322630d
+Chaincode is installed on peer0.airtel
+++ peer lifecycle chaincode querycommitted --channelID consent-channel --name basic
+++ sed -n '/Version:/{s/.*Sequence: //; s/, Endorsement Plugin:.*$//; p;}'
+Error: query failed with status: 404 - namespace basic is not defined
++ COMMITTED_CC_SEQUENCE=
++ res=0
+Using organization 1
++ peer lifecycle chaincode queryinstalled --output json
++ grep '^basic_1.0:b2974d4b301358c998b17154ea19f8376cd812fddfd96150a17888520322630d$'
++ jq -r 'try (.installed_chaincodes[].package_id)'
++ res=0
+basic_1.0:b2974d4b301358c998b17154ea19f8376cd812fddfd96150a17888520322630d
+Query installed successful on peer0.jio on channel
+Using organization 1
++ peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile /workspaces/fabric-samples/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem --channelID consent-channel --name basic --version 1.0 --package-id basic_1.0:b2974d4b301358c998b17154ea19f8376cd812fddfd96150a17888520322630d --sequence 1
++ res=0
+2025-02-12 19:46:28.366 UTC 0001 INFO [chaincodeCmd] ClientWait -> txid [0de358a78fc51e0f025794251db6f07c53fee232d72703b38ba908a9f4bdabf7] committed with status (VALID) at localhost:7051
+Chaincode definition approved on peer0.jio on channel 'consent-channel'
+Using organization 1
+Checking the commit readiness of the chaincode definition on peer0.jio on channel 'consent-channel'...
+Attempting to check the commit readiness of the chaincode definition on peer0.jio, Retry after 3 seconds.
++ peer lifecycle chaincode checkcommitreadiness --channelID consent-channel --name basic --version 1.0 --sequence 1 --output json
++ res=0
+{
+        "approvals": {
+                "AirtelMSP": false,
+                "JIOMSP": true
+        }
+}
+Checking the commit readiness of the chaincode definition successful on peer0.jio on channel 'consent-channel'
+Using organization 2
+Checking the commit readiness of the chaincode definition on peer0.airtel on channel 'consent-channel'...
+Attempting to check the commit readiness of the chaincode definition on peer0.airtel, Retry after 3 seconds.
++ peer lifecycle chaincode checkcommitreadiness --channelID consent-channel --name basic --version 1.0 --sequence 1 --output json
++ res=0
+{
+        "approvals": {
+                "AirtelMSP": false,
+                "JIOMSP": true
+        }
+}
+Checking the commit readiness of the chaincode definition successful on peer0.airtel on channel 'consent-channel'
+Using organization 2
++ peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile /workspaces/fabric-samples/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem --channelID consent-channel --name basic --version 1.0 --package-id basic_1.0:b2974d4b301358c998b17154ea19f8376cd812fddfd96150a17888520322630d --sequence 1
++ res=0
+2025-02-12 19:46:36.635 UTC 0001 INFO [chaincodeCmd] ClientWait -> txid [89d01bb2f003a1dd0c20d84dc1fbd21d52738107567b771bd6913360daae9a13] committed with status (VALID) at localhost:9051
+Chaincode definition approved on peer0.airtel on channel 'consent-channel'
+Using organization 1
+Checking the commit readiness of the chaincode definition on peer0.jio on channel 'consent-channel'...
+Attempting to check the commit readiness of the chaincode definition on peer0.jio, Retry after 3 seconds.
++ peer lifecycle chaincode checkcommitreadiness --channelID consent-channel --name basic --version 1.0 --sequence 1 --output json
++ res=0
+{
+        "approvals": {
+                "AirtelMSP": true,
+                "JIOMSP": true
+        }
+}
+Checking the commit readiness of the chaincode definition successful on peer0.jio on channel 'consent-channel'
+Using organization 2
+Checking the commit readiness of the chaincode definition on peer0.airtel on channel 'consent-channel'...
+Attempting to check the commit readiness of the chaincode definition on peer0.airtel, Retry after 3 seconds.
++ peer lifecycle chaincode checkcommitreadiness --channelID consent-channel --name basic --version 1.0 --sequence 1 --output json
++ res=0
+{
+        "approvals": {
+                "AirtelMSP": true,
+                "JIOMSP": true
+        }
+}
+Checking the commit readiness of the chaincode definition successful on peer0.airtel on channel 'consent-channel'
+Using organization 1
+Using organization 2
++ peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile /workspaces/fabric-samples/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem --channelID consent-channel --name basic --peerAddresses localhost:7051 --tlsRootCertFiles /workspaces/fabric-samples/test-network/organizations/peerOrganizations/jio.example.com/tlsca/tlsca.jio.example.com-cert.pem --peerAddresses localhost:9051 --tlsRootCertFiles /workspaces/fabric-samples/test-network/organizations/peerOrganizations/airtel.example.com/tlsca/tlsca.airtel.example.com-cert.pem --version 1.0 --sequence 1
++ res=0
+2025-02-12 19:46:45.218 UTC 0001 INFO [chaincodeCmd] ClientWait -> txid [dc511b14c656003e2962482921e9b31741e7c36c7fe1041bc31b9e575909317d] committed with status (VALID) at localhost:7051
+2025-02-12 19:46:45.226 UTC 0002 INFO [chaincodeCmd] ClientWait -> txid [dc511b14c656003e2962482921e9b31741e7c36c7fe1041bc31b9e575909317d] committed with status (VALID) at localhost:9051
+Chaincode definition committed on channel 'consent-channel'
+Using organization 1
+Querying chaincode definition on peer0.jio on channel 'consent-channel'...
+Attempting to Query committed status on peer0.jio, Retry after 3 seconds.
++ peer lifecycle chaincode querycommitted --channelID consent-channel --name basic
++ res=0
+Committed chaincode definition for chaincode 'basic' on channel 'consent-channel':
+Version: 1.0, Sequence: 1, Endorsement Plugin: escc, Validation Plugin: vscc, Approvals: [AirtelMSP: true, JIOMSP: true]
+Query chaincode definition successful on peer0.jio on channel 'consent-channel'
+Using organization 2
+Querying chaincode definition on peer0.airtel on channel 'consent-channel'...
+Attempting to Query committed status on peer0.airtel, Retry after 3 seconds.
++ peer lifecycle chaincode querycommitted --channelID consent-channel --name basic
++ res=0
+Committed chaincode definition for chaincode 'basic' on channel 'consent-channel':
+Version: 1.0, Sequence: 1, Endorsement Plugin: escc, Validation Plugin: vscc, Approvals: [AirtelMSP: true, JIOMSP: true]
+Query chaincode definition successful on peer0.airtel on channel 'consent-channel'
+Chaincode initialization is not required
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ export PATH=${PWD}/../bin:$PATH
+PATH=$PWD/../config/
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID=JIOMSP
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/jio.example.com/peers/peer0.jio.exam@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ export FABRIC_CFG_PATH=$PWD/../config/
+ple.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/jio.example.com/users/Admin@jio.example.com/msp
+export CORE_PEER_ADDRESS=localhost:7051@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ export CORE_PEER_TLS_ENABLED=true
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ export CORE_PEER_LOCALMSPID=JIOMSP
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/jio.example.com/peers/peer0.jio.example.com/tls/ca.crt
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/jio.example.com/users/Admin@jio.example.com/msp
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ export CORE_PEER_ADDRESS=localhost:7051
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C consent-channel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/jio.example.com/peers/peer0.jio.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/airtel.example.com/peers/peer0.airtel.example.com/tls/ca.crt" -c '{"function":"InitLedger","Args":[]}'
+2025-02-12 19:47:37.077 UTC 0001 INFO [chaincodeCmd] chaincodeInvokeOrQuery -> Chaincode invoke successful. result: status:200 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ peer chaincode query -C consent-channel -n basic -c '{"Args":["GetAllAssets"]}'
+[{"AppraisedValue":300,"Color":"blue","ID":"asset1","Owner":"Tomoko","Size":5},{"AppraisedValue":400,"Color":"red","ID":"asset2","Owner":"Brad","Size":5},{"AppraisedValue":500,"Color":"green","ID":"asset3","Owner":"Jin Soo","Size":10},{"AppraisedValue":600,"Color":"yellow","ID":"asset4","Owner":"Max","Size":10},{"AppraisedValue":700,"Color":"black","ID":"asset5","Owner":"Adriana","Size":15},{"AppraisedValue":800,"Color":"white","ID":"asset6","Owner":"Michel","Size":15}]
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C consent-channel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/jio.example.com/peers/peer0.jio.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/airtel.example.com/peers/peer0.airtel.example.com/tls/ca.crt" -c '{"function":"TransferAsset","Args":["asset6","Christopher"]}'
+2025-02-12 19:47:56.418 UTC 0001 INFO [chaincodeCmd] chaincodeInvokeOrQuery -> Chaincode invoke successful. result: status:200 payload:"Michel" 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C consent-channel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/jio.example.com/peers/peer0.jio.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/airtel.example.com/peers/peer0.airtel.example.com/tls/ca.crt" -c '{"function":"SmartContract:CreateAsset","Args":["asset7", "lavender", "20", "JOE", "600"]}'
+2025-02-12 19:48:02.973 UTC 0001 INFO [chaincodeCmd] chaincodeInvokeOrQuery -> Chaincode invoke successful. result: status:200 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C consent-channel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/jio.example.com/peers/peer0.jio.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/airtel.example.com/peers/peer0.airtel.example.com/tls/ca.crt" -c '{"function":"SmartContract:CreateAsset","Args":["asset8", "pink", "40", "John", "500"]}'
+2025-02-12 19:48:09.690 UTC 0001 INFO [chaincodeCmd] chaincodeInvokeOrQuery -> Chaincode invoke successful. result: status:200 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C consent-channel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/jio.example.com/peers/peer0.jio.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/airtel.example.com/peers/peer0.airtel.example.com/tls/ca.crt" -c '{"function":"SmartContract:CreateAsset","Args":["asset9", "magenta", "30", "Terry", "800"]}'
+2025-02-12 19:48:20.143 UTC 0001 INFO [chaincodeCmd] chaincodeInvokeOrQuery -> Chaincode invoke successful. result: status:200 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ ,
+bash: ,: command not found
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ peer chaincode query -C consent-channel -n basic -c '{"Args":["GetAllAssets"]}'
+[{"AppraisedValue":300,"Color":"blue","ID":"asset1","Owner":"Tomoko","Size":5},{"AppraisedValue":400,"Color":"red","ID":"asset2","Owner":"Brad","Size":5},{"AppraisedValue":500,"Color":"green","ID":"asset3","Owner":"Jin Soo","Size":10},{"AppraisedValue":600,"Color":"yellow","ID":"asset4","Owner":"Max","Size":10},{"AppraisedValue":700,"Color":"black","ID":"asset5","Owner":"Adriana","Size":15},{"AppraisedValue":800,"Color":"white","ID":"asset6","Owner":"Christopher","Size":15},{"AppraisedValue":600,"Color":"lavender","ID":"asset7","Owner":"JOE","Size":20},{"AppraisedValue":500,"Color":"pink","ID":"asset8","Owner":"John","Size":40},{"AppraisedValue":800,"Color":"magenta","ID":"asset9","Owner":"Terry","Size":30}]
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ 
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $ export PATH=${PWD}/../bin:$PATH
+PATH=$PWD/../config/
+@krishnanmano ➜ /workspaces/fabric-samples/test-network (main) $

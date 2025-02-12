@@ -19,8 +19,8 @@ TEST_NETWORK_HOME=${TEST_NETWORK_HOME:-${PWD}}
 
 export CORE_PEER_TLS_ENABLED=true
 export ORDERER_CA=${TEST_NETWORK_HOME}/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
-export PEER0_ORG1_CA=${TEST_NETWORK_HOME}/organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
-export PEER0_ORG2_CA=${TEST_NETWORK_HOME}/organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem
+export PEER0_JIO_CA=${TEST_NETWORK_HOME}/organizations/peerOrganizations/jio.example.com/tlsca/tlsca.jio.example.com-cert.pem
+export PEER0_AIRTEL_CA=${TEST_NETWORK_HOME}/organizations/peerOrganizations/airtel.example.com/tlsca/tlsca.airtel.example.com-cert.pem
 export PEER0_ORG3_CA=${TEST_NETWORK_HOME}/organizations/peerOrganizations/org3.example.com/tlsca/tlsca.org3.example.com-cert.pem
 
 # Set environment variables for the peer org
@@ -33,14 +33,16 @@ setGlobals() {
   fi
   infoln "Using organization ${USING_ORG}"
   if [ $USING_ORG -eq 1 ]; then
-    export CORE_PEER_LOCALMSPID=Org1MSP
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG1_CA
-    export CORE_PEER_MSPCONFIGPATH=${TEST_NETWORK_HOME}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+    export ORG_NAME=jio
+    export CORE_PEER_LOCALMSPID=JIOMSP
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_JIO_CA
+    export CORE_PEER_MSPCONFIGPATH=${TEST_NETWORK_HOME}/organizations/peerOrganizations/jio.example.com/users/Admin@jio.example.com/msp
     export CORE_PEER_ADDRESS=localhost:7051
   elif [ $USING_ORG -eq 2 ]; then
-    export CORE_PEER_LOCALMSPID=Org2MSP
-    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG2_CA
-    export CORE_PEER_MSPCONFIGPATH=${TEST_NETWORK_HOME}/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+    export ORG_NAME=airtel
+    export CORE_PEER_LOCALMSPID=AirtelMSP
+    export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_AIRTEL_CA
+    export CORE_PEER_MSPCONFIGPATH=${TEST_NETWORK_HOME}/organizations/peerOrganizations/airtel.example.com/users/Admin@airtel.example.com/msp
     export CORE_PEER_ADDRESS=localhost:9051
   elif [ $USING_ORG -eq 3 ]; then
     export CORE_PEER_LOCALMSPID=Org3MSP
@@ -64,7 +66,11 @@ parsePeerConnectionParameters() {
   PEERS=""
   while [ "$#" -gt 0 ]; do
     setGlobals $1
-    PEER="peer0.org$1"
+    if [ $ORG -eq 1 ]; then
+      PEER="peer0.jio"
+    elif [ $ORG -eq 2 ]; then
+      PEER="peer0.airtel"
+    fi
     ## Set peer addresses
     if [ -z "$PEERS" ]
     then
@@ -74,7 +80,7 @@ parsePeerConnectionParameters() {
     fi
     PEER_CONN_PARMS=("${PEER_CONN_PARMS[@]}" --peerAddresses $CORE_PEER_ADDRESS)
     ## Set path to TLS certificate
-    CA=PEER0_ORG$1_CA
+    CA=CORE_PEER_TLS_ROOTCERT_FILE
     TLSINFO=(--tlsRootCertFiles "${!CA}")
     PEER_CONN_PARMS=("${PEER_CONN_PARMS[@]}" "${TLSINFO[@]}")
     # shift by one to get to the next organization
